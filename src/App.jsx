@@ -1,45 +1,80 @@
+// App.jsx
 import { useState } from "react";
 import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar/SearchBar";
-// import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-// import ImageGallery from "./components/ImageGallery/ImageGallery";
-// import Loader from "./components/Loader/Loader";
-// import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-// import ImageModal from "./components/ImageModal/ImageModal";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 const App = () => {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleSearchSubmit = (searchQuery) => {
     setQuery(searchQuery);
-    // Виконай пошук зображень тут
+    // Виконайте пошук зображень тут
   };
 
   const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
+    // Відкрийте модальне вікно з повним зображенням
   };
 
   return (
     <div className={styles.App}>
       <SearchBar onSubmit={handleSearchSubmit} />
-      {isLoading && <Loader />}
-      {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={handleImageClick} />
-      {images.length > 0 && !isLoading && <LoadMoreBtn />}
-      {isModalOpen && <ImageModal image={selectedImage} onClose={closeModal} />}
     </div>
   );
 };
 
 export default App;
+
+//нижній код післ того як оновиться імейдж
+
+//// App.jsx
+// import { useState } from "react";
+// import styles from "./App.module.css";
+// import SearchBar from "./components/SearchBar/SearchBar";
+// import ImageGallery from "./components/ImageGallery/ImageGallery";
+// import Loader from "./components/Loader/Loader";
+
+// const App = () => {
+//   const [query, setQuery] = useState("");
+//   const [images, setImages] = useState([]);
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const handleSearchSubmit = (searchQuery) => {
+//     setQuery(searchQuery);
+//     setIsLoading(true); // Починаємо завантаження
+//     // Виконайте пошук зображень тут
+//     setTimeout(() => {
+//       setIsLoading(false); // Закінчуємо завантаження
+//       setImages([
+//         {
+//           id: 1,
+//           webformatURL:
+//             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+//           tags: "google",
+//         },
+//         {
+//           id: 2,
+//           webformatURL:
+//             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+//           tags: "google",
+//         },
+//       ]);
+//     }, 2000);
+//   };
+
+//   const handleImageClick = (image) => {
+//     // Відкрийте модальне вікно з повним зображенням
+//   };
+
+//   return (
+//     <div className={styles.App}>
+//       <SearchBar onSubmit={handleSearchSubmit} />
+//       <ImageGallery images={images} onImageClick={handleImageClick} />
+//       {isLoading && <Loader />}
+//     </div>
+//   );
+// };
+
+// export default App;
