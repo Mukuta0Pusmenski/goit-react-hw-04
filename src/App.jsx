@@ -1,33 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 const App = () => {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (query === "") {
+      return;
+    }
+
+    const fetchImages = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `https://pixabay.com/api/?q=${query}&page=1&key=your_api_key`
+        );
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        const data = await response.json();
+        setImages(data.hits);
+        setError(null);
+      } catch (error) {
+        setError("Failed to load images. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, [query]);
 
   const handleSearchSubmit = (searchQuery) => {
     setQuery(searchQuery);
-    setIsLoading(true); // Починаємо завантаження
-    // Виконайте пошук зображень тут
-    setTimeout(() => {
-      setIsLoading(false); // Закінчуємо завантаження
-      setImages([
-        {
-          id: 1,
-          webformatURL: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-          tags: "google",
-        },
-        {
-          id: 2,
-          webformatURL: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-          tags: "google",
-        },
-      ]);
-    }, 2000);
+    setImages([]);
+    setError(null);
   };
 
   const handleImageClick = (image) => {
@@ -37,8 +51,9 @@ const App = () => {
   return (
     <div className={styles.App}>
       <SearchBar onSubmit={handleSearchSubmit} />
-      <ImageGallery images={images} onImageClick={handleImageClick} />
       {isLoading && <Loader />}
+      {error && <ErrorMessage message={error} />}
+      <ImageGallery images={images} onImageClick={handleImageClick} />
     </div>
   );
 };
