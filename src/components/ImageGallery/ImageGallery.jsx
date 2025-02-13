@@ -1,5 +1,4 @@
 // ImageGallery.jsx
-import React from "react";
 import styles from "./ImageGallery.module.css";
 import ImageCard from "./ImageCard";
 

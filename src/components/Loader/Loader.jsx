@@ -1,5 +1,4 @@
 // Loader.jsx
-import React from "react";
 import { TailSpin } from "react-loader-spinner";
 import styles from "./Loader.module.css";
 
@@ -12,6 +11,3 @@ const Loader = () => {
 };
 
 export default Loader;
-
-// npm install react-loader-spinner
-// кинути верхню строку в термінал 
