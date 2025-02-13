@@ -1,11 +1,11 @@
 // Loader.jsx
-import { TailSpin } from "react-loader-spinner";
-import styles from "./Loader.module.css";
+import { ClipLoader } from 'react-spinners';
+import styles from './Loader.module.css';
 
 const Loader = () => {
   return (
     <div className={styles.loader}>
-      <TailSpin color="#00BFFF" height={80} width={80} />
+      <ClipLoader size={50} color="#00BFFF" />
     </div>
   );
 };
