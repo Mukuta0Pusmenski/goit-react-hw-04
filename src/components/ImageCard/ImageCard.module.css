@@ -1,0 +1,9 @@
+/* ImageCard.module.css */
+.card {
+    cursor: pointer;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}

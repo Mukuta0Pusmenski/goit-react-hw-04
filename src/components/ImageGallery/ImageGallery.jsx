@@ -1,6 +1,6 @@
 // ImageGallery.jsx
 import styles from "./ImageGallery.module.css";
-import ImageCard from "./ImageCard";
+import ImageCard from "../ImageCard/ImageCard";
 
 const ImageGallery = ({ images, onImageClick }) => {
   if (images.length === 0) {
@@ -11,7 +11,7 @@ const ImageGallery = ({ images, onImageClick }) => {
     <ul className={styles.gallery}>
       {images.map((image) => (
         <li key={image.id} className={styles.galleryItem}>
-          <ImageCard image={image} />
+          <ImageCard image={image} onImageClick={onImageClick} />
         </li>
       ))}
     </ul>
