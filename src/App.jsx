@@ -26,6 +26,10 @@ const App = () => {
       console.log('API Response Status:', response.status); // Логування статусу відповіді
       const responseText = await response.text();
       console.log('Response Text:', responseText); // Логування тексту відповіді
+      if (response.status === 400) {
+        console.error('Invalid or missing API key');
+        throw new Error('Invalid or missing API key');
+      }
       const data = JSON.parse(responseText);
       console.log('Fetched Data:', data); // Логування отриманих даних
       if (data.hits && data.hits.length > 0) {
