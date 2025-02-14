@@ -24,7 +24,9 @@ const App = () => {
     try {
       const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}`);
       console.log('API Response Status:', response.status); // Логування статусу відповіді
-      const data = await response.json();
+      const responseText = await response.text();
+      console.log('Response Text:', responseText); // Логування тексту відповіді
+      const data = JSON.parse(responseText);
       console.log('Fetched Data:', data); // Логування отриманих даних
       if (data.hits && data.hits.length > 0) {
         setImages(data.hits);
