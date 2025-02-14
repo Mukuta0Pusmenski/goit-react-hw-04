@@ -10,11 +10,13 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
     },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)', // Темний фон
+    },
   };
 
-  // Перевірка наявності зображення та його поля largeImageURL
   if (!image || !image.largeImageURL) {
-    return null; // Не рендерити модальне вікно, якщо зображення немає або поле largeImageURL відсутнє
+    return null;
   }
 
   return (
@@ -23,6 +25,7 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       onRequestClose={onRequestClose}
       style={customStyles}
       contentLabel="Example Modal"
+      ariaHideApp={false} // Не приховувати основний вміст для прикладів
     >
       <img src={image.largeImageURL} alt={image.tags} />
       <button onClick={onRequestClose}>Close</button>

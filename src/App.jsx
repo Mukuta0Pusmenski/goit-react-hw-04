@@ -3,16 +3,38 @@ import styles from './App.module.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
+import Loader from './components/Loader/Loader';
+
+const API_KEY = 'YOUR_PIXABAY_API_KEY'; // Заміни 'YOUR_PIXABAY_API_KEY' на свій API ключ
+const BASE_URL = 'https://pixabay.com/api/';
 
 const App = () => {
   const [query, setQuery] = useState('');
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearchSubmit = (searchQuery) => {
     setQuery(searchQuery);
-    // Perform image search here
+    fetchImages(searchQuery);
+  };
+
+  const fetchImages = async (searchQuery) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${BASE_URL}?q=${searchQuery}&key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true`);
+      const data = await response.json();
+      if (data.hits.length > 0) {
+        setImages(data.hits);
+      } else {
+        console.error('No images found');
+      }
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleImageClick = (image) => {
@@ -38,6 +60,7 @@ const App = () => {
         onRequestClose={closeModal}
         image={selectedImage}
       />
+      {isLoading && <Loader />}
     </div>
   );
 };

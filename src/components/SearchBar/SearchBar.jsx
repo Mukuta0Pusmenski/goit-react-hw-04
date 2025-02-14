@@ -1,10 +1,9 @@
-// SearchBar.jsx
-import { useState } from "react"; // Імпорт useState
-import styles from "./SearchBar.module.css";
-import toast, { Toaster } from "react-hot-toast";
+import { useState } from 'react';
+import styles from './SearchBar.module.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -12,12 +11,12 @@ const SearchBar = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim() === "") {
-      toast.error("Please enter a search term");
+    if (query.trim() === '') {
+      toast.error('Please enter a search term');
       return;
     }
     onSubmit(query);
-    setQuery("");
+    setQuery('');
   };
 
   return (

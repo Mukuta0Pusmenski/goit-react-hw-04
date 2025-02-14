@@ -1,4 +1,3 @@
-// Loader.jsx
 import { ClipLoader } from 'react-spinners';
 import styles from './Loader.module.css';
 
