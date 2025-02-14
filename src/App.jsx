@@ -23,11 +23,11 @@ const App = () => {
   const fetchImages = async (searchQuery) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}&image_type=photo`);
+      const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}`);
       console.log('API Response Status:', response.status); // Логування статусу відповіді
       const data = await response.json();
       console.log('Fetched Data:', data); // Логування отриманих даних
-      if (data.hits.length > 0) {
+      if (data.hits && data.hits.length > 0) {
         setImages(data.hits);
       } else {
         console.error('No images found');
