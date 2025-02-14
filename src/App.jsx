@@ -5,7 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
 import Loader from './components/Loader/Loader';
 
-const API_KEY = 'YOUR_PIXABAY_API_KEY'; // Заміни 'YOUR_PIXABAY_API_KEY' на свій API ключ
+const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA';
 const BASE_URL = 'https://pixabay.com/api/';
 
 const App = () => {
