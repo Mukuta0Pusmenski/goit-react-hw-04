@@ -5,7 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
 import Loader from './components/Loader/Loader';
 
-const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA'; // Використовуй свій Access Key
+const API_KEY = 'm7VpIulhYuqJcmrdPt8_Z2ewSUJfZ08bhvd6TZdl8-Q'; // Новий Access Key
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -61,13 +61,13 @@ const App = () => {
   return (
     <div className={styles.App}>
       <SearchBar onSubmit={handleSearchSubmit} />
+      {isLoading && <Loader />}
       <ImageGallery images={images} onImageClick={handleImageClick} />
       <ImageModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         image={selectedImage}
       />
-      {isLoading && <Loader />}
     </div>
   );
 };
