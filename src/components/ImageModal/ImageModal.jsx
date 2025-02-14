@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from 'react-modal';
 
 const ImageModal = ({ isOpen, onRequestClose, image }) => {
@@ -12,6 +11,11 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       transform: 'translate(-50%, -50%)',
     },
   };
+
+  // Перевірка наявності зображення та його поля largeImageURL
+  if (!image || !image.largeImageURL) {
+    return null; // Не рендерити модальне вікно, якщо зображення немає або поле largeImageURL відсутнє
+  }
 
   return (
     <Modal

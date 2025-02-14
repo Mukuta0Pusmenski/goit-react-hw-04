@@ -16,12 +16,17 @@ const App = () => {
   };
 
   const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
+    if (image.largeImageURL) {
+      setSelectedImage(image);
+      setIsModalOpen(true);
+    } else {
+      console.error("largeImageURL відсутнє в об'єкті зображення", image);
+    }
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedImage(null); // Скидання вибраного зображення
   };
 
   return (
