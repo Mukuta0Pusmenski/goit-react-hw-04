@@ -23,7 +23,7 @@ const App = () => {
   const fetchImages = async (searchQuery) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}&image_type=photo&orientation=horizontal&safesearch=true`);
+      const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}&image_type=photo`);
       console.log('API Response Status:', response.status); // Логування статусу відповіді
       const data = await response.json();
       console.log('Fetched Data:', data); // Логування отриманих даних
