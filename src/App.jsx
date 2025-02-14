@@ -5,7 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
 import Loader from './components/Loader/Loader';
 
-const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA';
+const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA'; // Використовуй свій Access Key
 const BASE_URL = 'https://pixabay.com/api/';
 
 const App = () => {
@@ -23,8 +23,9 @@ const App = () => {
   const fetchImages = async (searchQuery) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}?q=${searchQuery}&key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true`);
+      const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}&image_type=photo&orientation=horizontal&safesearch=true`);
       const data = await response.json();
+      console.log('Fetched Data:', data); // Логування отриманих даних
       if (data.hits.length > 0) {
         setImages(data.hits);
       } else {
