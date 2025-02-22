@@ -15,7 +15,7 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
     },
   };
 
-  if (!image || !image.largeImageURL) {
+  if (!image || !image.urls || !image.urls.full) {
     return null;
   }
 
@@ -24,10 +24,10 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={customStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={false} // Не приховувати основний вміст для прикладів
+      contentLabel="Image Modal"
+      ariaHideApp={false}
     >
-      <img src={image.largeImageURL} alt={image.tags} />
+      <img src={image.urls.full} alt={image.alt_description} />
       <button onClick={onRequestClose}>Close</button>
     </Modal>
   );

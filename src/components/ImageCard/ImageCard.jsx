@@ -1,16 +1,16 @@
 import styles from "./ImageCard.module.css";
 
 const ImageCard = ({ image, onImageClick }) => {
-  const { largeImageURL, webformatURL, tags } = image;
+  const { urls, alt_description } = image;
 
-  if (!largeImageURL) {
-    console.error("largeImageURL is null", image);
+  if (!urls || !urls.small) {
+    console.error("Image URLs are missing", image);
     return null;
   }
 
   return (
     <div className={styles.card} onClick={() => onImageClick(image)}>
-      <img src={webformatURL} alt={tags} className={styles.image} />
+      <img src={urls.small} alt={alt_description} className={styles.image} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
 import Loader from './components/Loader/Loader';
 
-const API_KEY = 'm7VpIulhYuqJcmrdPt8_Z2ewSUJfZ08bhvd6TZdl8-Q'; // Новий Access Key
+const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA'; // Новий Unsplash Access Key
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -22,20 +22,13 @@ const App = () => {
   const fetchImages = async (searchQuery) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(searchQuery)}`);
-      console.log('API Response Status:', response.status); // Логування статусу відповіді
-      const responseText = await response.text();
-      console.log('Response Text:', responseText); // Логування тексту відповіді
-      if (response.status === 400) {
-        console.error('Invalid or missing API key');
-        throw new Error('Invalid or missing API key');
-      }
-      const data = JSON.parse(responseText);
-      console.log('Fetched Data:', data); // Логування отриманих даних
-      if (data.hits && data.hits.length > 0) {
-        setImages(data.hits);
+      const response = await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&client_id=${API_KEY}`);
+      const data = await response.json();
+      if (data.results && data.results.length > 0) {
+        setImages(data.results);
       } else {
         console.error('No images found');
+        setImages([]);
       }
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -45,11 +38,11 @@ const App = () => {
   };
 
   const handleImageClick = (image) => {
-    if (image.largeImageURL) {
+    if (image.urls && image.urls.full) {
       setSelectedImage(image);
       setIsModalOpen(true);
     } else {
-      console.error("largeImageURL відсутнє в об'єкті зображення", image);
+      console.error("URLs відсутні в об'єкті зображення", image);
     }
   };
 
