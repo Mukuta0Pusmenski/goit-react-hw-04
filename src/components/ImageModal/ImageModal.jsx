@@ -9,16 +9,16 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      width: '90%', // Обмежуємо максимальну ширину
-      height: '90%', // Обмежуємо максимальну висоту
-      overflow: 'hidden', // Запобігаємо прокрутці модального вікна
+      width: '90%',
+      height: '90%',
+      overflow: 'hidden',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       position: 'relative',
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)', // Темний фон
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
     },
   };
 
@@ -33,6 +33,8 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       style={customStyles}
       contentLabel="Image Modal"
       ariaHideApp={false}
+      shouldCloseOnOverlayClick={true} // Закриття при кліку на оверлей
+      shouldCloseOnEsc={true} // Закриття при натисканні ESC
     >
       <button onClick={onRequestClose} style={{
         position: 'absolute',
