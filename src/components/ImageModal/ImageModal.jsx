@@ -55,7 +55,7 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
         alt={image.alt_description}
         style={{
           maxWidth: '100%',
-          maxHeight: '100%',
+          maxHeight: '80vh', // Забезпечуємо вміщення зображення у вікно
           objectFit: 'contain',
         }}
       />
