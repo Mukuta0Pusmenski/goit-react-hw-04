@@ -43,13 +43,19 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
         position: 'absolute',
         top: '10px',
         left: '10px',
-        backgroundColor: '#fff',
+        backgroundColor: '#ff6347',
+        color: '#fff',
         border: 'none',
-        padding: '5px 10px',
+        padding: '10px 20px',
         cursor: 'pointer',
         borderRadius: '5px',
-        fontWeight: 'bold'
-      }}>Close</button>
+        fontWeight: 'bold',
+        fontSize: '16px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+        transition: 'background-color 0.3s ease',
+      }} onMouseEnter={(e) => e.target.style.backgroundColor = '#e5533d'}
+         onMouseLeave={(e) => e.target.style.backgroundColor = '#ff6347'}
+      >Close</button>
       <img
         src={image.urls.full}
         alt={image.alt_description}
