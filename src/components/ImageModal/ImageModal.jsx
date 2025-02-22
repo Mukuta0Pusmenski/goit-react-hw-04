@@ -9,13 +9,12 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      width: '90%',
-      height: '90%',
-      overflow: 'hidden',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      padding: '20px', // Додаємо бар'єр навколо картинки
+      backgroundColor: '#fff',
       position: 'relative',
+      border: 'none', // Прибираємо стандартну рамку
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Додаємо тінь
+      borderRadius: '10px', // Округлюємо краї
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -33,13 +32,13 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       style={customStyles}
       contentLabel="Image Modal"
       ariaHideApp={false}
-      shouldCloseOnOverlayClick={true} // Закриття при кліку на оверлей
-      shouldCloseOnEsc={true} // Закриття при натисканні ESC
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
     >
       <button onClick={onRequestClose} style={{
         position: 'absolute',
         top: '10px',
-        right: '10px',
+        left: '10px',
         backgroundColor: '#fff',
         border: 'none',
         padding: '5px 10px',
@@ -52,8 +51,8 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
         alt={image.alt_description}
         style={{
           maxWidth: '100%',
-          maxHeight: '100%',
-          objectFit: 'contain'
+          maxHeight: '80vh',
+          objectFit: 'contain',
         }}
       />
     </Modal>
