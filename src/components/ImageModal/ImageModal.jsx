@@ -11,10 +11,14 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
       transform: 'translate(-50%, -50%)',
       padding: '20px', // Додаємо бар'єр навколо картинки
       backgroundColor: '#fff',
-      position: 'relative',
       border: 'none', // Прибираємо стандартну рамку
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Додаємо тінь
       borderRadius: '10px', // Округлюємо краї
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      maxWidth: '90vw', // Обмежуємо максимальну ширину вікна
+      maxHeight: '90vh', // Обмежуємо максимальну висоту вікна
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -51,7 +55,7 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
         alt={image.alt_description}
         style={{
           maxWidth: '100%',
-          maxHeight: '80vh',
+          maxHeight: '100%',
           objectFit: 'contain',
         }}
       />
