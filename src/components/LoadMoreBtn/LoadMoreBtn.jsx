@@ -1,4 +1,3 @@
-// LoadMoreBtn.jsx
 import styles from "./LoadMoreBtn.module.css";
 
 const LoadMoreBtn = ({ onClick }) => {
