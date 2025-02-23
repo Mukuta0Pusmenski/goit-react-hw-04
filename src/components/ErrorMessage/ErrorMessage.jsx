@@ -1,4 +1,3 @@
-// ErrorMessage.jsx
 import styles from "./ErrorMessage.module.css";
 
 const ErrorMessage = ({ message }) => {

@@ -5,6 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import ImageModal from './components/ImageModal/ImageModal';
 import Loader from './components/Loader/Loader';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 
 const API_KEY = 'edZqyenA0fvmM1hz_PV7fn6-6khb6RbW6WMNHVkpvwA'; // Новий Unsplash Access Key
 
@@ -14,11 +15,14 @@ const App = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1); // Нова змінна стану для сторінок
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState(''); // Новий стан для помилок
 
   const handleSearchSubmit = (searchQuery) => {
     setQuery(searchQuery);
-    setPage(1); // Скидаємо сторінку при новому пошуку
+    setPage(1);
+    setImages([]);
+    setError(''); // Скидання помилки перед новим пошуком
     fetchImages(searchQuery, 1);
   };
 
@@ -28,12 +32,13 @@ const App = () => {
       const response = await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&client_id=${API_KEY}&page=${page}`);
       const data = await response.json();
       if (data.results && data.results.length > 0) {
-        setImages(prevImages => page === 1 ? data.results : [...prevImages, ...data.results]); // Додаємо нові зображення до попередніх
+        setImages(prevImages => page === 1 ? data.results : [...prevImages, ...data.results]);
       } else {
-        console.error('No images found');
+        setError('No images found'); // Встановлення помилки, якщо зображення не знайдені
         if (page === 1) setImages([]);
       }
     } catch (error) {
+      setError('Error fetching images'); // Встановлення помилки при помилці запиту
       console.error('Error fetching images:', error);
     } finally {
       setIsLoading(false);
@@ -66,6 +71,7 @@ const App = () => {
     <div className={styles.App}>
       <SearchBar onSubmit={handleSearchSubmit} />
       {isLoading && <Loader />}
+      {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={handleImageClick} />
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={loadMoreImages} />}
       <ImageModal
